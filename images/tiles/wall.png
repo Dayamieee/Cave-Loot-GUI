@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <!-- Base wall tile -->
+  <rect width="32" height="32" fill="#708090"/>
+  
+  <!-- Wall texture - brick pattern -->
+  <rect x="0" y="0" width="16" height="8" fill="#778899" stroke="#2F4F4F" stroke-width="1"/>
+  <rect x="16" y="0" width="16" height="8" fill="#778899" stroke="#2F4F4F" stroke-width="1"/>
+  
+  <rect x="0" y="8" width="8" height="8" fill="#778899" stroke="#2F4F4F" stroke-width="1"/>
+  <rect x="8" y="8" width="16" height="8" fill="#778899" stroke="#2F4F4F" stroke-width="1"/>
+  <rect x="24" y="8" width="8" height="8" fill="#778899" stroke="#2F4F4F" stroke-width="1"/>
+  
+  <rect x="0" y="16" width="16" height="8" fill="#778899" stroke="#2F4F4F" stroke-width="1"/>
+  <rect x="16" y="16" width="16" height="8" fill="#778899" stroke="#2F4F4F" stroke-width="1"/>
+  
+  <rect x="0" y="24" width="8" height="8" fill="#778899" stroke="#2F4F4F" stroke-width="1"/>
+  <rect x="8" y="24" width="16" height="8" fill="#778899" stroke="#2F4F4F" stroke-width="1"/>
+  <rect x="24" y="24" width="8" height="8" fill="#778899" stroke="#2F4F4F" stroke-width="1"/>
+  
+  <!-- Highlights and shadows -->
+  <rect x="0" y="0" width="32" height="2" fill="#A9A9A9" opacity="0.5"/>
+  <rect x="0" y="0" width="2" height="32" fill="#A9A9A9" opacity="0.5"/>
+  <rect x="0" y="30" width="32" height="2" fill="#2F4F4F" opacity="0.5"/>
+  <rect x="30" y="0" width="2" height="32" fill="#2F4F4F" opacity="0.5"/>
+</svg>

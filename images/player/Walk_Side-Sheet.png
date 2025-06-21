@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- Body -->
+  <rect x="16" y="16" width="32" height="40" rx="8" fill="#3498db"/>
+  
+  <!-- Head -->
+  <circle cx="32" cy="16" r="12" fill="#f5deb3"/>
+  
+  <!-- Eyes -->
+  <circle cx="28" cy="14" r="2" fill="#2c3e50"/>
+  <circle cx="36" cy="14" r="2" fill="#2c3e50"/>
+  
+  <!-- Mouth -->
+  <path d="M 28,20 Q 32,24 36,20" stroke="#2c3e50" stroke-width="1" fill="none"/>
+  
+  <!-- Arms (in walking position) -->
+  <rect x="10" y="20" width="8" height="24" rx="4" fill="#f5deb3" transform="rotate(15, 14, 20)"/>
+  <rect x="46" y="20" width="8" height="24" rx="4" fill="#f5deb3" transform="rotate(-15, 50, 20)"/>
+  
+  <!-- Legs (in walking position) -->
+  <rect x="20" y="56" width="8" height="8" fill="#2c3e50" transform="rotate(-15, 24, 56)"/>
+  <rect x="36" y="56" width="8" height="8" fill="#2c3e50" transform="rotate(15, 40, 56)"/>
+</svg>

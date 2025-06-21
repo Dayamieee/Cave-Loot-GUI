@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <!-- Dark cave background -->
+  <rect width="800" height="600" fill="#1a1a2e"/>
+  
+  <!-- Cave ceiling details -->
+  <path d="M0 0 Q200 100 400 50 Q600 100 800 0" fill="#16213e" stroke="#0f3460" stroke-width="2"/>
+  
+  <!-- Cave wall details - left side -->
+  <path d="M0 0 Q100 200 50 400 Q100 500 0 600" fill="#16213e" stroke="#0f3460" stroke-width="2"/>
+  
+  <!-- Cave wall details - right side -->
+  <path d="M800 0 Q700 200 750 400 Q700 500 800 600" fill="#16213e" stroke="#0f3460" stroke-width="2"/>
+  
+  <!-- Stalactites -->
+  <path d="M100 0 L120 50 L140 0" fill="#0f3460"/>
+  <path d="M300 0 L320 70 L340 0" fill="#0f3460"/>
+  <path d="M500 0 L520 60 L540 0" fill="#0f3460"/>
+  <path d="M700 0 L720 40 L740 0" fill="#0f3460"/>
+  
+  <!-- Stalagmites -->
+  <path d="M150 600 L170 550 L190 600" fill="#0f3460"/>
+  <path d="M350 600 L370 530 L390 600" fill="#0f3460"/>
+  <path d="M550 600 L570 540 L590 600" fill="#0f3460"/>
+  <path d="M750 600 L770 560 L790 600" fill="#0f3460"/>
+  
+  <!-- Cave floor -->
+  <rect x="0" y="570" width="800" height="30" fill="#533d2c"/>
+  
+  <!-- Random cave details - rocks and crystals -->
+  <circle cx="200" cy="400" r="15" fill="#533d2c"/>
+  <circle cx="220" cy="410" r="10" fill="#533d2c"/>
+  <circle cx="600" cy="450" r="20" fill="#533d2c"/>
+  <circle cx="630" cy="460" r="12" fill="#533d2c"/>
+  
+  <!-- Crystals -->
+  <polygon points="400,300 410,270 420,300" fill="#5c82e8" opacity="0.7"/>
+  <polygon points="410,300 420,260 430,300" fill="#5c82e8" opacity="0.7"/>
+  <polygon points="700,350 710,320 720,350" fill="#5c82e8" opacity="0.7"/>
+  <polygon points="250,400 260,370 270,400" fill="#5c82e8" opacity="0.7"/>
+</svg>
