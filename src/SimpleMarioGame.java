@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -40,6 +42,9 @@ public class SimpleMarioGame extends JFrame implements KeyListener {
     // Enemy sprite variables
     private BufferedImage orcIdleImage;
     private BufferedImage orcRunImage;
+    
+    // Item image variables
+    private Map<String, BufferedImage> itemImages = new HashMap<>();
     
     // Backpack variables (from CaveLootChallenge)
     private static final int MAX_BACKPACK_CAPACITY = 50;
@@ -94,6 +99,37 @@ public class SimpleMarioGame extends JFrame implements KeyListener {
             
             orcIdleImage = ImageIO.read(orcIdleFile);
             orcRunImage = ImageIO.read(orcRunFile);
+            
+            // Load item images from LootItems folder
+            // Define mapping between item names in code and actual filenames
+            Map<String, String> itemFileMapping = new HashMap<>();
+            itemFileMapping.put("Gold Nugget", "Gold Nugget.png");
+            itemFileMapping.put("Ancient Relic", "Ancient Relic.png");
+            itemFileMapping.put("Gemstone", "Gemstone.png");
+            itemFileMapping.put("Magic Scroll", "MagicScroll.png");
+            itemFileMapping.put("Silver Chalice", "SilverChalice.png");
+            itemFileMapping.put("Enchanted Sword", "EnchantedSword.png");
+            itemFileMapping.put("Crystal Orb", "CrystalOrb.png");
+            itemFileMapping.put("Golden Crown", "GoldenCrown.png");
+            itemFileMapping.put("Rare Spices", "Rare Spices.png");
+            itemFileMapping.put("Ancient Coin", "AncientCoin.png");
+            
+            System.out.println("Loading item images from LootItems folder:");
+            for (Map.Entry<String, String> entry : itemFileMapping.entrySet()) {
+                String itemName = entry.getKey();
+                String fileName = entry.getValue();
+                File itemFile = new File("c:\\CaveGame\\images\\LootItems\\" + fileName);
+                System.out.println("Loading item image from: " + itemFile.getAbsolutePath());
+                System.out.println("File exists: " + itemFile.exists());
+                
+                if (itemFile.exists()) {
+                    BufferedImage itemImage = ImageIO.read(itemFile);
+                    itemImages.put(itemName, itemImage);
+                    System.out.println("Successfully loaded image for: " + itemName);
+                } else {
+                    System.out.println("Failed to load image for: " + itemName);
+                }
+            }
         } catch (IOException e) {
             System.out.println("Could not load images: " + e.getMessage());
             e.printStackTrace();
@@ -101,6 +137,7 @@ public class SimpleMarioGame extends JFrame implements KeyListener {
             playerRunningImage = null;
             orcIdleImage = null;
             orcRunImage = null;
+            itemImages.clear(); // Clear any partially loaded item images
         }
         
         // Load background image
@@ -707,34 +744,48 @@ public class SimpleMarioGame extends JFrame implements KeyListener {
                 g.drawString("Weight: " + lastCollectedItem.getWeight(), panelX + 20, panelY + 60);
                 g.drawString("Value: " + lastCollectedItem.getValue(), panelX + 20, panelY + 85);
                 
-                // Draw a colored shape based on item type
-                String type = lastCollectedItem.getImageType();
-                int shapeSize = 50;
-                int shapeX = panelX + panelWidth - shapeSize - 20;
-                int shapeY = panelY + (panelHeight - shapeSize) / 2;
+                // Draw the item image or a colored shape as fallback
+                int imageSize = 50;
+                int imageX = panelX + panelWidth - imageSize - 20;
+                int imageY = panelY + (panelHeight - imageSize) / 2;
                 
-                if (type.equals("Resources")) {
-                    g.setColor(new Color(255, 215, 0)); // Gold
-                    g.fillOval(shapeX, shapeY, shapeSize, shapeSize);
-                    g.setColor(Color.BLACK);
-                    g.drawOval(shapeX, shapeY, shapeSize, shapeSize);
-                } else if (type.equals("Dungeon_Props")) {
-                    g.setColor(new Color(192, 192, 192)); // Silver
-                    g.fillRect(shapeX, shapeY, shapeSize, shapeSize);
-                    g.setColor(Color.BLACK);
-                    g.drawRect(shapeX, shapeY, shapeSize, shapeSize);
-                } else if (type.equals("Esoteric")) {
-                    g.setColor(new Color(138, 43, 226)); // Purple
-                    int[] xPoints = {shapeX + shapeSize/2, shapeX, shapeX + shapeSize};
-                    int[] yPoints = {shapeY, shapeY + shapeSize, shapeY + shapeSize};
-                    g.fillPolygon(xPoints, yPoints, 3);
-                    g.setColor(Color.BLACK);
-                    g.drawPolygon(xPoints, yPoints, 3);
-                } else if (type.equals("Tools")) {
-                    g.setColor(new Color(139, 69, 19)); // Brown
-                    g.fillRoundRect(shapeX, shapeY, shapeSize, shapeSize, 10, 10);
-                    g.setColor(Color.BLACK);
-                    g.drawRoundRect(shapeX, shapeY, shapeSize, shapeSize, 10, 10);
+                // Try to get the item image
+                BufferedImage itemImage = itemImages.get(lastCollectedItem.getName());
+                
+                if (itemImage != null) {
+                    // Draw the item image
+                    g.drawImage(itemImage, imageX, imageY, imageSize, imageSize, this);
+                    
+                    // Draw a subtle border around the image
+                    g.setColor(new Color(255, 255, 255, 100));
+                    g.drawRect(imageX, imageY, imageSize, imageSize);
+                } else {
+                    // Fallback to colored shapes if image not found
+                    String type = lastCollectedItem.getImageType();
+                    
+                    if (type.equals("Resources")) {
+                        g.setColor(new Color(255, 215, 0)); // Gold
+                        g.fillOval(imageX, imageY, imageSize, imageSize);
+                        g.setColor(Color.BLACK);
+                        g.drawOval(imageX, imageY, imageSize, imageSize);
+                    } else if (type.equals("Dungeon_Props")) {
+                        g.setColor(new Color(192, 192, 192)); // Silver
+                        g.fillRect(imageX, imageY, imageSize, imageSize);
+                        g.setColor(Color.BLACK);
+                        g.drawRect(imageX, imageY, imageSize, imageSize);
+                    } else if (type.equals("Esoteric")) {
+                        g.setColor(new Color(138, 43, 226)); // Purple
+                        int[] xPoints = {imageX + imageSize/2, imageX, imageX + imageSize};
+                        int[] yPoints = {imageY, imageY + imageSize, imageY + imageSize};
+                        g.fillPolygon(xPoints, yPoints, 3);
+                        g.setColor(Color.BLACK);
+                        g.drawPolygon(xPoints, yPoints, 3);
+                    } else if (type.equals("Tools")) {
+                        g.setColor(new Color(139, 69, 19)); // Brown
+                        g.fillRoundRect(imageX, imageY, imageSize, imageSize, 10, 10);
+                        g.setColor(Color.BLACK);
+                        g.drawRoundRect(imageX, imageY, imageSize, imageSize, 10, 10);
+                    }
                 }
             }
         }
@@ -792,7 +843,9 @@ public class SimpleMarioGame extends JFrame implements KeyListener {
             int value = 5 + new Random().nextInt(30); // Random value between 5-35
             int weight = 2 + new Random().nextInt(18); // Random weight between 2-20
             
-            this.item = new Item(itemNames[randomIndex], value, weight, itemTypes[randomTypeIndex]);
+            // Create the item with the selected name and properties
+            String selectedItemName = itemNames[randomIndex];
+            this.item = new Item(selectedItemName, value, weight, itemTypes[randomTypeIndex]);
         }
     }
     

@@ -32,22 +32,36 @@ replay_pid*
 .project
 .classpath
 .settings/
+.metadata/
+.recommenders/
 
 # OS specific files
 .DS_Store
-Thumbs.db
+Thumb.db
+Thumbsdb.db
+desktop.ini
 
 # Temporary files
 *.tmp
 *.bak
 *.swp
 *~.nib
+*.orig
 
 # Build directories
 bin/
 build/
 out/
 target/
+dist/
+
+# Debug files
+*.debug
+
+# Local configuration files
+*.properties.local
+*.config.local
+
 
 # Class directory
 class/
